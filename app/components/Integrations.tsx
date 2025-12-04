@@ -47,8 +47,6 @@ export default function Integrations() {
                 alt="Tampilan Timeline Menej"
                 className="
                   w-full max-w-4xl rounded-xl shadow-1xl border-5 border-blue-100
-                  md:translate-x-24  /* offset ke kanan untuk desktop */
-                  md:w-[140%]        /* lebih besar dari kolom teks */
                 "
               />
 
