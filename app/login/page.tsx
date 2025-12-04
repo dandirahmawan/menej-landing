@@ -78,16 +78,16 @@ export default function LoginPage() {
   };
 
   const initGoogleSignIn = () => {
-  window.google.accounts.id.initialize({
-    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-    callback: handleGoogleResponse,
-  });
+    window.google?.accounts.id.initialize({
+      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+      callback: handleGoogleResponse,
+    });
 
-  window.google.accounts.id.renderButton(
-    document.getElementById("gsi-button"),
-    { theme: "outline", size: "large" }
-  );
-};
+    window.google?.accounts.id.renderButton(
+      document.getElementById("gsi-button"),
+      { theme: "outline", size: "large" }
+    );
+  };
 
 const handleGoogleResponse = async (response: { credential: string }) => {
   setOnGoogleLogin(true); // spinner ON instantly

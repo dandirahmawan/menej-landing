@@ -4,41 +4,50 @@ import {
   GanttChart,
   MapPinCheck,
   MessageSquare,
-  CalendarCheck
+  CalendarCheck,
+  LucideProps
 } from "lucide-react";
 
-const items = [
-  [
-    "Tampilan Kanban",
-    "Visualisasi tugas dalam bentuk kartu yang mudah dipindahkan, sehingga memudahkan pengelolaan progres pekerjaan.",
-    KanbanSquare
-  ],
-  [
-    "Tampilan Daftar / Tabel",
-    "Menampilkan tugas dalam format tabel yang rapi untuk memudahkan pencarian, sorting, dan analisis data secara cepat.",
-    Table
-  ],
-  [
-    "Tampilan Timeline",
-    "Menampilkan daftar tugas dalam bentuk garis waktu yang interaktif...",
-    GanttChart
-  ],
-  [
-    "Absensi Berdasarkan Lokasi",
-    "Pencatatan kehadiran otomatis menggunakan GPS, memastikan karyawan melakukan absensi sesuai lokasi yang ditentukan.",
-    MapPinCheck
-  ],
-  [
-    "Percakapan / Chats",
-    "Kolaborasi instan antar anggota tim melalui pesan langsung pada proyek atau tugas yang sedang dikerjakan.",
-    MessageSquare
-  ],
-  [
-    "Pengajuan Cuti",
-    "Fitur untuk mengajukan izin cuti, sakit, atau izin lainnya secara digital, lengkap dengan alur persetujuan atasan sehingga proses lebih cepat dan transparan.",
-    CalendarCheck
-  ]
+const items: Feature[] = [
+  {
+    title: "Tampilan Kanban",
+    desc: "Visualisasi tugas dalam bentuk kartu yang mudah dipindahkan, sehingga memudahkan pengelolaan progres pekerjaan.",
+    Icon: KanbanSquare,
+  },
+  {
+    title: "Tampilan Daftar / Tabel",
+    desc: "Menampilkan tugas dalam format tabel yang rapi untuk memudahkan pencarian, sorting, dan analisis data secara cepat.",
+    Icon: Table,
+  },
+  {
+    title: "Tampilan Timeline",
+    desc: "Menampilkan daftar tugas dalam bentuk garis waktu yang interaktif, membantu Anda memahami durasi dan keterkaitan antar tugas.",
+    Icon: GanttChart,
+  },
+  {
+    title: "Absensi Berdasarkan Lokasi",
+    desc: "Pencatatan kehadiran otomatis menggunakan GPS, memastikan karyawan melakukan absensi sesuai lokasi yang ditentukan.",
+    Icon: MapPinCheck,
+  },
+  {
+    title: "Percakapan / Chats",
+    desc: "Kolaborasi instan antar anggota tim melalui pesan langsung pada proyek atau tugas yang sedang dikerjakan.",
+    Icon: MessageSquare,
+  },
+  {
+    title: "Pengajuan Cuti",
+    desc: "Fitur untuk mengajukan izin cuti, sakit, atau izin lainnya secara digital, lengkap dengan alur persetujuan atasan sehingga proses lebih cepat dan transparan.",
+    Icon: CalendarCheck,
+  }
 ];
+
+type IconType = React.ComponentType<LucideProps>;
+
+type Feature = {
+  title: string;
+  desc: string;
+  Icon: IconType;
+};
 
 export default function Services() {
   return (
@@ -49,7 +58,7 @@ export default function Services() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-10 justify-center place-items-center">
-          {items.map(([title, desc, Icon], i) => (
+          {items.map(({title, desc, Icon}, i) => (
             <div
               key={i}
               className="p-6 bg-secondary rounded-xl hover:bg-[#1A415F] transition
