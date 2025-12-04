@@ -23,7 +23,8 @@ export default function Hero() {
         {/* IMAGE FIRST ON MOBILE */}
         <div className="order-1 md:order-2 flex justify-center md:justify-end">
           <img
-            src="/images/Dell-XPS-15.png"
+            // src="/images/Dell-XPS-15.png"
+             src="/images/menej-ils.png"
             alt="Tampilan Menej"
             className="w-[300px] md:w-[480px] drop-shadow-xl"
           />

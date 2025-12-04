@@ -3,6 +3,67 @@ import Link from "next/link";
 export default function Integrations() {
   return (
     <>
+      <section className="py-24 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* GRID WRAPPER */}
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+
+            {/* TEXT ALWAYS FIRST */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-primary leading-snug">
+                Pantau Progres Proyek dengan <br />
+                <span className="text-accent">Timeline Interaktif</span>
+              </h2>
+
+              <p className="mt-4 text-gray-600 leading-relaxed max-w-md">
+                Menej tidak hanya sekadar mencatat tugas — Anda dapat melihat bagaimana
+                setiap tugas saling terhubung, siapa yang bertanggung jawab, dan berapa
+                lama pekerjaan akan berlangsung. Semua dalam satu garis waktu yang mudah
+                dipahami.
+              </p>
+
+              <ul className="mt-6 space-y-2 text-gray-700 text-sm">
+                <li>• Jadwalkan pekerjaan dengan drag & drop</li>
+                <li>
+                  • Lihat status pengerjaan
+                  <span className="text-[#EAB308] font-semibold"> On Progress</span>, 
+                  <span className="text-[#16A34A] font-semibold"> Completed</span>, atau tertunda
+                </li>
+                <li>• Identifikasi bottleneck & keterlambatan lebih cepat</li>
+                <li>• Visualisasi timeline untuk seluruh anggota tim</li>
+              </ul>
+
+              <p className="mt-4 text-xs text-gray-400 italic">
+                *Fitur ini membantu tim bekerja lebih terarah, mengurangi miskomunikasi,
+                dan mempercepat penyelesaian proyek.*
+              </p>
+            </div>
+
+            {/* IMAGE - MOVES DEPENDING ON SCREEN */}
+            <div className="relative mt-10 md:mt-0 md:order-last order-last md:order-none flex justify-center">
+              <img
+                src="/images/menej-timeline.png"
+                alt="Tampilan Timeline Menej"
+                className="
+                  w-full max-w-4xl rounded-xl shadow-1xl border-5 border-blue-100
+                  md:translate-x-24  /* offset ke kanan untuk desktop */
+                  md:w-[140%]        /* lebih besar dari kolom teks */
+                "
+              />
+
+              <span className="
+                absolute -bottom-5 left-1/2 -translate-x-1/2
+                bg-primary text-white text-md px-3 py-1 rounded-lg shadow-2xl
+              ">
+                Timeline Menej
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 px-10 text-center bg-white">
         <h2 className="text-3xl font-semibold text-primary">
           Mulai gunakan Menej sekarang juga
@@ -43,7 +104,7 @@ export default function Integrations() {
           biaya langganan, pengguna akan mendapatkan pemberitahuan terlebih dahulu.
         </p>
       </section>
-
+      
       <section className="text-center py-24 px-10 bg-primary text-white">
         <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
           Siap mengelola pekerjaan dan tim dengan lebih efisien?
