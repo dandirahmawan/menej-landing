@@ -57,10 +57,10 @@ export default function Hero() {
 
           {/* DOWNLOAD BUTTONS */}
           <div className="flex gap-0 mt-6 justify-center md:justify-start flex-wrap">
-            <a href="#">
+            <a href="https://play.google.com/store/apps/details?id=com.app.menej">
               <img src="/images/google-play.png" className="h-13 hover:opacity-90 transition" style={{marginLeft: "-7px"}}/>
             </a>
-            <a href="#">
+            <a href="https://apps.apple.com/id/app/menej/id6746373265">
               <img src="/images/app-store-download.png" className="h-11 hover:opacity-90 transition mt-1" />
             </a>
           </div>

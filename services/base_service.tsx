@@ -9,6 +9,7 @@ if (typeof document !== 'undefined') {
 }
 
 axios.defaults.headers.common['authorization'] = "Bearer " + token;
+axios.defaults.headers.common['Accept-Language'] = "ID";
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default class base_service {

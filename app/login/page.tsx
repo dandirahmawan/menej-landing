@@ -11,11 +11,19 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [redirectLink, setRedirectLink] = useState("")
   const [onGoogleLogin, setOnGoogleLogin] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
       if(window.location.href.split("?")[1] !== undefined) {
           setRedirectLink("?"+window.location.href.split("?")[1])
       }
+
+      const ua = navigator.userAgent.toLowerCase();
+      const mobile =
+        /iphone|ipad|android|mobile|ipod|blackberry|iemobile|kindle|silk|opera mini/.test(
+          ua
+        );
+      setIsMobile(mobile);
 
       const checkGoogle = setInterval(() => {
         if (window.google && window.google.accounts) {
@@ -73,7 +81,7 @@ export default function LoginPage() {
       console.error(err);
       setError("Terjadi kesalahan. Coba lagi nanti.");
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -118,109 +126,157 @@ const handleGoogleResponse = async (response: { credential: string }) => {
 
   return (
     <div className="min-h-screen bg-[#F3F5F9] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+      {isMobile ? (
+        <div className="text-center px-4 py-10">
+          {/* Logo */}
+          <img
+            src="/images/logo_text_blue.png"
+            className="w-[150px] mx-auto mb-6"
+            alt="Menej"
+          />
 
-        {onGoogleLogin && (
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
-            <div className="bg-white p-6 rounded-xl shadow-xl w-[300px] text-center animate-scaleIn">
-              <div className="flex justify-center mb-4">
-                <span className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></span>
-              </div>
-              <h2 className="text-lg font-semibold text-primary">Memproses Login...</h2>
-              <p className="text-xs text-gray-500 mt-1">
-                Anda sedang masuk menggunakan Google.
-                Jangan tutup halaman ini.
-              </p>
-            </div>
-          </div>
-        )}
+          {/* Title */}
+          <h1 className="text-2xl font-semibold text-primary mb-4">
+            Gunakan Menej di Aplikasi Mobile
+          </h1>
 
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
-          <Link href={"/"}>
-            <img
-              src="/images/logo_text_blue.png"
-              alt="Tampilan Menej"
-              className="w-[150px] max-w-full"
-            />
-          </Link>
-          <h1 className="mt-3 text-2xl font-semibold text-primary">Masuk ke Menej</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Kelola tugas, absensi, dan kolaborasi tim dalam satu tempat.
+          <p className="text-xs text-gray-600 mb-3 max-w-sm mx-auto mt-4">
+            Akses Menej melalui browser di perangkat mobile belum tersedia.
+            Untuk menggunakan Menej di ponsel, silakan unduh aplikasi resmi Android atau iOS.
           </p>
-        </div>
 
-        {/* Login dengan Google */}
-        {
-          <button
-            id="gsi-button"
-            type="button"
-            onClick={() => setOnGoogleLogin(true)}
-            className="w-full flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            <span className="w-5 h-5 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[10px]">
-              G
-            </span>
-            <span>Masuk dengan Google</span>
-          </button>
-        }
+          {/* DOWNLOAD BUTTONS */}
+          <div className="flex gap-3 items-center justify-center mb-10">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.app.menej"
+              target="_blank"
+              className="hover:opacity-90 transition"
+            >
+              <img src="/images/google-play.png" className="h-11" alt="Download Android" />
+            </a>
 
-        <div className="flex items-center my-6">
-          <div className="flex-1 h-px bg-gray-200" />
-          <span className="px-3 text-xs text-gray-400">atau login dengan email</span>
-          <div className="flex-1 h-px bg-gray-200" />
-        </div>
-
-        {/* FORM LOGIN */}
-        <form className="space-y-4" onSubmit={handleLogin}>
-          <div className="text-left">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:ring-primary/40 focus:border-primary"
-              placeholder="nama@perusahaan.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <a
+              href="https://apps.apple.com/id/app/menej/id6746373265"
+              target="_blank"
+              className="hover:opacity-90 transition"
+            >
+              <img src="/images/app-store-download.png" className="h-9" alt="Download iOS" />
+            </a>
           </div>
 
-          <div className="text-left">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:ring-primary/40 focus:border-primary"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          {/* PHONE MOCKUP */}
+          <img
+            src="/images/Samsung-Galaxy-S23.png"
+            className="w-64 mx-auto mb-8 drop-shadow-lg"
+            alt="Menej Mobile Preview"
+          />  
 
-          {error && (
-            <p className="text-red-500 text-xs text-center">{error}</p>
+        </div>
+      ) : (
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+
+          {onGoogleLogin && (
+            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
+              <div className="bg-white p-6 rounded-xl shadow-xl w-[300px] text-center animate-scaleIn">
+                <div className="flex justify-center mb-4">
+                  <span className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></span>
+                </div>
+                <h2 className="text-lg font-semibold text-primary">Memproses Login...</h2>
+                <p className="text-xs text-gray-500 mt-1">
+                  Anda sedang masuk menggunakan Google.
+                  Jangan tutup halaman ini.
+                </p>
+              </div>
+            </div>
           )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full mt-2 bg-primary text-white rounded-xl py-2.5 text-sm font-medium hover:bg-[#1A415F] transition-colors disabled:opacity-50"
-          >
-            {loading ? "Memproses..." : "Masuk"}
-          </button>
-        </form>
+          {/* Logo */}
+          <div className="flex flex-col items-center mb-8">
+            <Link href={"/"}>
+              <img
+                src="/images/logo_text_blue.png"
+                alt="Tampilan Menej"
+                className="w-[150px] max-w-full"
+              />
+            </Link>
+            <h1 className="mt-3 text-2xl font-semibold text-primary">Masuk ke Menej</h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Kelola tugas, absensi, dan kolaborasi tim dalam satu tempat.
+            </p>
+          </div>
 
-        <div className="mt-6 text-center text-sm text-gray-600">
-          Belum punya akun?{" "}
-          <Link href={"/register"}>
-            <button className="text-primary font-medium hover:underline">
-              Daftar sekarang
+          {/* Login dengan Google */}
+          {
+            <button
+              id="gsi-button"
+              type="button"
+              onClick={() => setOnGoogleLogin(true)}
+              className="w-full flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              <span className="w-5 h-5 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[10px]">
+                G
+              </span>
+              <span>Masuk dengan Google</span>
             </button>
-          </Link>
+          }
+
+          <div className="flex items-center my-6">
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="px-3 text-xs text-gray-400">atau login dengan email</span>
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
+
+          {/* FORM LOGIN */}
+          <form className="space-y-4" onSubmit={handleLogin}>
+            <div className="text-left">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:ring-primary/40 focus:border-primary"
+                placeholder="nama@perusahaan.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="text-left">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:ring-primary/40 focus:border-primary"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            {error && (
+              <p className="text-red-500 text-xs text-center">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-2 bg-primary text-white rounded-xl py-2.5 text-sm font-medium hover:bg-[#1A415F] transition-colors disabled:opacity-50"
+            >
+              {loading ? "Memproses..." : "Masuk"}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center text-sm text-gray-600">
+            Belum punya akun?{" "}
+            <Link href={"/register"}>
+              <button className="text-primary font-medium hover:underline">
+                Daftar sekarang
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
